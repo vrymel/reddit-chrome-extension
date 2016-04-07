@@ -16,6 +16,9 @@
         "js/Entry.js",
         "js/Parser.js",
         "content_scripts/reddit.js"
+      ],
+      "css": [
+        "css/reddit.css"
       ]
     }
   ]
