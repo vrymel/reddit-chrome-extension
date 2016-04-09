@@ -5,7 +5,7 @@
 function Entry() {
     this.thumbnail = null;
     this.url = null;
-}
+};
 
 Entry.prototype.setThumbnail = function(thumbnail) {
     this.thumbnail = thumbnail;
@@ -21,4 +21,4 @@ Entry.prototype.setUrl = function(url) {
 
 Entry.prototype.getUrl = function() {
     return this.url;
-}
+};
