@@ -12,7 +12,7 @@
     {
       "matches": ["https://www.reddit.com/*"],
       "js": [
-        "js/library/jquery-2.2.3.min.js",
+        "library/jquery-2.2.3.min.js",
         "js/Entry.js",
         "js/Parser.js",
         "content_scripts/reddit.js"
