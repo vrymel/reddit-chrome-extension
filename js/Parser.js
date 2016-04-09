@@ -10,7 +10,11 @@ Parser.prototype.parseThings = function($siteTable) {
     var self = this;
 
     $things.each(function(index, thing) {
-        entries.push(self.parse(thing));
+        var entry = self.parse(thing);
+
+        if(entry) {
+            entries.push(entry);
+        }
     });
 
     return entries;
@@ -19,11 +23,17 @@ Parser.prototype.parseThings = function($siteTable) {
 Parser.prototype.parse = function(thing) {
     var $thing = $(thing);
     var $anchor = $thing.find('a.thumbnail');
-    var thumbnail = $anchor.find('img').attr('src');
+    var $thumbnail = $anchor.find('img');
+
+    if($thumbnail.length === 0) {
+        return null;
+    }
+
+    var thumbnailSrc = $thumbnail.attr('src');
     var url = $anchor.attr('href');
 
     var entry = new Entry();
-    entry.setThumbnail(thumbnail);
+    entry.setThumbnail(thumbnailSrc);
     entry.setUrl(url);
 
     return entry;
