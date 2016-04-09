@@ -19,7 +19,10 @@ var reddit = (function() {
     }
 
     function _clearSiteTable() {
-        $siteTable.html('');
+        var $navButtons = $siteTable.find('.nav-buttons');
+        var $clear = $('<div>', { class: 'clear spacer' });
+
+        $siteTable.html('').append($clear, $navButtons);
     }
 
     function _renderGallery() {
@@ -42,7 +45,7 @@ var reddit = (function() {
             var node = _wrapToAnchor(entry.getUrl(), img);
             node = _wrapToHolder(node, translateX);
 
-            $siteTable.append(node);
+            $siteTable.prepend(node);
         }
 
         $siteTable.show();
