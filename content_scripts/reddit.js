@@ -42,7 +42,7 @@ var reddit = (function() {
                 img.style.zoom = ratio;
             }
 
-            var node = _wrapToAnchor(entry.getUrl(), img);
+            var node = _wrapToAnchor(entry, img);
             node = _wrapToHolder(node, translateX);
 
             $siteTable.prepend(node);
@@ -62,9 +62,10 @@ var reddit = (function() {
         return holder;
     }
 
-    function _wrapToAnchor(href, node) {
+    function _wrapToAnchor(entry, node) {
         var anchor = $('<a>', {
-            href: href,
+            title: entry.getTitle(),
+            href: entry.getUrl(),
             target: '_blank'
         });
 

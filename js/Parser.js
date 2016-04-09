@@ -23,16 +23,19 @@ Parser.prototype.parseThings = function($siteTable) {
 Parser.prototype.parse = function(thing) {
     var $thing = $(thing);
     var $anchor = $thing.find('a.thumbnail');
+    var $title = $thing.find('p.title a.title');
     var $thumbnail = $anchor.find('img');
 
     if($thumbnail.length === 0) {
         return null;
     }
 
+    var title = $title.text();
     var thumbnailSrc = $thumbnail.attr('src');
     var url = $anchor.attr('href');
 
     var entry = new Entry();
+    entry.setTitle(title);
     entry.setThumbnail(thumbnailSrc);
     entry.setUrl(url);
 

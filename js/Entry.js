@@ -3,8 +3,17 @@
  */
 
 function Entry() {
+    this.title = null;
     this.thumbnail = null;
     this.url = null;
+};
+
+Entry.prototype.getTitle = function() {
+    return this.title;
+};
+
+Entry.prototype.setTitle = function(title) {
+    this.title = title;
 };
 
 Entry.prototype.setThumbnail = function(thumbnail) {
