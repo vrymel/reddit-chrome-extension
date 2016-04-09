@@ -18,6 +18,14 @@ var reddit = (function() {
         _renderGallery();
     }
 
+    function _initMock() {
+        var path = chrome.extension.getURL('html/mock-container.html');
+
+        $.get(path, function(response) {
+            $siteTable.html(response).show();
+        });
+    }
+
     function _clearSiteTable() {
         var $navButtons = $siteTable.find('.nav-buttons');
         var $clear = $('<div>', { class: 'clear spacer' });
@@ -75,10 +83,11 @@ var reddit = (function() {
     }
 
     return {
-        init: _init
+        init: _init,
+        initMock: _initMock
     }
 
 })();
 
-reddit.init();
+reddit.initMock();
 

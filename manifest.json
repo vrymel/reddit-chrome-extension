@@ -21,5 +21,8 @@
         "css/reddit.css"
       ]
     }
+  ],
+  "web_accessible_resources": [
+    "html/*"
   ]
 }
