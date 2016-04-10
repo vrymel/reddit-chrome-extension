@@ -15,6 +15,7 @@
         "library/jquery-2.2.3.min.js",
         "js/Entry.js",
         "js/Parser.js",
+        "js/reddit-api.js",
         "content_scripts/reddit.js"
       ],
       "css": [

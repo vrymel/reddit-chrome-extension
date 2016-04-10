@@ -1,0 +1,19 @@
+{
+  "name": "reddit-chrome-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension to override pictures/images related subreddit to a gallery layout",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vrymel/reddit-chrome-extension.git"
+  },
+  "author": "vrymel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vrymel/reddit-chrome-extension/issues"
+  },
+  "homepage": "https://github.com/vrymel/reddit-chrome-extension#readme"
+}
