@@ -1,9 +1,10 @@
-#header-bottom-left, #header-bottom-right, .side, #siteTable { display: none; }
+#header-bottom-left, .side, #siteTable { display: none; }
 
 .thumbnail-holder {
     background-color: #636363;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
 
     float: left;
     margin: 5px 5px 0 0;
@@ -51,4 +52,18 @@
 
 .thumbnail-holder.translate-90:hover img {
     transform: translateX(-90%);
+}
+
+.thumbnail-holder .controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #333333;
+    width: 140px;
+    padding: 5px;
+}
+
+.thumbnail-holder .controls .arrow {
+    float: left;
+    margin-left: 5px;
 }

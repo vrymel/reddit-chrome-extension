@@ -4,6 +4,7 @@
 
 var reddit = (function() {
     var $siteTable = $('#siteTable');
+    var $gridContainer = null;
 
     // width and height size
     var WHSize = 140;
@@ -13,24 +14,47 @@ var reddit = (function() {
     function _init() {
         entries = parser.parseThings($siteTable);
 
-        _clearSiteTable();
+        _createContainer();
 
         _renderGallery();
+
+        var $navButtons = $siteTable.find('.nav-buttons');
+        var $clearSpacer = $('<div>', { class: 'clear spacer' });
+        $gridContainer.append($clearSpacer, $navButtons);
+        
+        _attachEvents();
     }
 
     function _initMock() {
         var path = chrome.extension.getURL('html/mock-container.html');
 
         $.get(path, function(response) {
-            $siteTable.html(response).show();
+            var $response = $(response);
+            
+            $siteTable.html('');
+            $siteTable.prepend($response).show();
+        });
+    }
+    
+    function _attachEvents() {
+        $gridContainer.on('click', '.arrow.up', function(event) {
+            var $thingNode = $siteTable.find('#' + $(this).data('thing-id'));
+            var $up = $thingNode.find('.arrow.up');
+            
+            if($up.length === 0) {
+                $up = $thingNode.find('.arrow.upmod');
+            }
+            
+            $up.click();
         });
     }
 
-    function _clearSiteTable() {
-        var $navButtons = $siteTable.find('.nav-buttons');
-        var $clear = $('<div>', { class: 'clear spacer' });
+    function _createContainer() {
+        if(!$gridContainer) {
+            $gridContainer = $($('<div>', {class: 'container'}));
 
-        $siteTable.html('').append($clear, $navButtons);
+            $gridContainer.insertBefore($siteTable);
+        }
     }
 
     function _renderGallery() {
@@ -56,35 +80,20 @@ var reddit = (function() {
             var $controls = _setupControls(entry);
             node.append($controls);
 
-            $siteTable.prepend(node);
+            $gridContainer.prepend(node);
         }
 
-        $siteTable.show();
+        // $siteTable.show();
     }
 
     function _setupControls(thing) {
-        var $domNode = $(thing.getDom());
-        var $likes = $domNode.find('.midcol.unvoted'); // a thing that has not been voted
-        var upVotedClass = '';
-        var downVotedClass = '';
+        var $controlsContainer = $('<div>', { class: 'controls' });
+        var $up = $('<div>', { class: 'arrow up', 'data-thing-id': thing.getThingId() });
+        var $down = $('<div>', { class: 'arrow down', 'data-thing-id': thing.getThingId() });
         
-        if($likes.length === 0) {
-            $likes = $domNode.find('.midcol.likes'); // the user already liked (up or down) the thing
-            
-            if($likes.length === 0) {
-                $likes = $domNode.find('.midcol.dislikes');
-                downVotedClass = 'mod';
-            } else {
-                upVotedClass = 'mod';
-            }
-        }
-
-        var $upVote = $likes.find('.arrow.up' + upVotedClass);
-        var $downVote = $likes.find('.arrow.down' + downVotedClass);
+        $controlsContainer.append($up, $down);
         
-        var $controlHolder = $('<div>', { class: 'controls' }).append($upVote, $downVote);
-        
-        return $controlHolder;
+        return $controlsContainer;
     }
 
     function _wrapToHolder(img, translateXValue) {

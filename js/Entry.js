@@ -3,14 +3,23 @@
  */
 
 function Entry() {
+    this.id = Entry.id++;
+    this.thingId = null;
     this.title = null;
     this.thumbnail = null;
     this.url = null;
     this.dom = null;
-    this.id = Entry.id++;
 };
 
 Entry.id = 0;
+
+Entry.prototype.getThingId = function() {
+    return this.thingId;  
+};
+
+Entry.prototype.setThingId = function(thingId) {
+    this.thingId = thingId;  
+};
 
 Entry.prototype.getId = function() {
     return this.id;  
@@ -47,3 +56,4 @@ Entry.prototype.setDom = function(dom) {
 Entry.prototype.getDom = function() {
     return this.dom;  
 };
+

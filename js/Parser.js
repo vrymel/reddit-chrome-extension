@@ -30,11 +30,13 @@ Parser.prototype.parse = function(thing) {
         return null;
     }
 
+    var thingId = $thing.attr('id');
     var title = $title.text();
     var thumbnailSrc = $thumbnail.attr('src');
     var url = $anchor.attr('href');
 
     var entry = new Entry();
+    entry.setThingId(thingId);
     entry.setTitle(title);
     entry.setThumbnail(thumbnailSrc);
     entry.setUrl(url);
