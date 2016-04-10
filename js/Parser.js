@@ -38,6 +38,7 @@ Parser.prototype.parse = function(thing) {
     entry.setTitle(title);
     entry.setThumbnail(thumbnailSrc);
     entry.setUrl(url);
+    entry.setDom(thing);
 
     return entry;
 };

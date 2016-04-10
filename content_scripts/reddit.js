@@ -53,10 +53,38 @@ var reddit = (function() {
             var node = _wrapToAnchor(entry, img);
             node = _wrapToHolder(node, translateX);
 
+            var $controls = _setupControls(entry);
+            node.append($controls);
+
             $siteTable.prepend(node);
         }
 
         $siteTable.show();
+    }
+
+    function _setupControls(thing) {
+        var $domNode = $(thing.getDom());
+        var $likes = $domNode.find('.midcol.unvoted'); // a thing that has not been voted
+        var upVotedClass = '';
+        var downVotedClass = '';
+        
+        if($likes.length === 0) {
+            $likes = $domNode.find('.midcol.likes'); // the user already liked (up or down) the thing
+            
+            if($likes.length === 0) {
+                $likes = $domNode.find('.midcol.dislikes');
+                downVotedClass = 'mod';
+            } else {
+                upVotedClass = 'mod';
+            }
+        }
+
+        var $upVote = $likes.find('.arrow.up' + upVotedClass);
+        var $downVote = $likes.find('.arrow.down' + downVotedClass);
+        
+        var $controlHolder = $('<div>', { class: 'controls' }).append($upVote, $downVote);
+        
+        return $controlHolder;
     }
 
     function _wrapToHolder(img, translateXValue) {
@@ -89,5 +117,5 @@ var reddit = (function() {
 
 })();
 
-reddit.initMock();
+reddit.init();
 

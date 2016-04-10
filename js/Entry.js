@@ -6,6 +6,14 @@ function Entry() {
     this.title = null;
     this.thumbnail = null;
     this.url = null;
+    this.dom = null;
+    this.id = Entry.id++;
+};
+
+Entry.id = 0;
+
+Entry.prototype.getId = function() {
+    return this.id;  
 };
 
 Entry.prototype.getTitle = function() {
@@ -30,4 +38,12 @@ Entry.prototype.setUrl = function(url) {
 
 Entry.prototype.getUrl = function() {
     return this.url;
+};
+
+Entry.prototype.setDom = function(dom) {
+    this.dom = dom;
+};
+
+Entry.prototype.getDom = function() {
+    return this.dom;  
 };
