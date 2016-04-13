@@ -37,16 +37,42 @@ var reddit = (function() {
     }
     
     function _attachEvents() {
-        $gridContainer.on('click', '.arrow.up', function(event) {
-            var $thingNode = $siteTable.find('#' + $(this).data('thing-id'));
-            var $up = $thingNode.find('.arrow.up');
+        var arrowClass = 'arrow';
+        var btnClasses = ['up', 'down'];
+        var clickedClass = 'mod';
+        
+        var i, l;
+        for(i = 0, l = btnClasses.length; i < l; i++) {
+            var btnClass = btnClasses[i];
+            var selector = '.' + arrowClass + '.' + btnClass;
+            var handler = function(selector, clickedClass, btnClass) {
+                return function() {
+                    var isClicked = false;
+                    var $copyBtn = $(this);
+                    var $thingNode = $siteTable.find('#' + $copyBtn.data('thing-id'));
+                    var $originalBtn = $thingNode.find(selector);
+                    
+                    if($originalBtn.length === 0) {
+                        $originalBtn = $thingNode.find(selector + clickedClass);
+                        isClicked = true;
+                    }
+                    
+                    var removeClass = btnClass;
+                    var addClass = btnClass + clickedClass;
+                    
+                    $originalBtn.click();
+                    
+                    if(isClicked) {
+                        removeClass = btnClass + clickedClass;
+                        addClass = btnClass;
+                    }
+                    
+                    $copyBtn.removeClass(removeClass).addClass(addClass);
+                };
+            };
             
-            if($up.length === 0) {
-                $up = $thingNode.find('.arrow.upmod');
-            }
-            
-            $up.click();
-        });
+            $gridContainer.on('click', selector, handler(selector, clickedClass, btnClass));    
+        }
     }
 
     function _createContainer() {
@@ -122,7 +148,7 @@ var reddit = (function() {
     return {
         init: _init,
         initMock: _initMock
-    }
+    };
 
 })();
 
