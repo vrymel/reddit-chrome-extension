@@ -106,7 +106,7 @@ var reddit = (function() {
             var $controls = _setupControls(entry);
             node.append($controls);
 
-            $gridContainer.prepend(node);
+            $gridContainer.append(node);
         }
 
         // $siteTable.show();
@@ -114,8 +114,9 @@ var reddit = (function() {
 
     function _setupControls(thing) {
         var $controlsContainer = $('<div>', { class: 'controls' });
-        var $up = $('<div>', { class: 'arrow up', 'data-thing-id': thing.getThingId() });
-        var $down = $('<div>', { class: 'arrow down', 'data-thing-id': thing.getThingId() });
+        var $voteButtons = $(thing.getDom()).find('.arrow');
+        var $up = $($voteButtons[0]).clone();
+        var $down = $($voteButtons[1]).clone();
         
         $controlsContainer.append($up, $down);
         
