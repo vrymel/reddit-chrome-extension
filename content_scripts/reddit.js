@@ -10,8 +10,14 @@ var reddit = (function() {
     var WHSize = 140;
     var entries = null
     var parser = new Parser();
+    var isListingPage = $('body').hasClass('listing-page');
 
     function _init() {
+        
+        if(!isListingPage) {
+            return false;
+        }
+        
         entries = parser.parseThings($siteTable);
 
         _createContainer();
@@ -114,11 +120,15 @@ var reddit = (function() {
 
     function _setupControls(thing) {
         var $controlsContainer = $('<div>', { class: 'controls' });
-        var $voteButtons = $(thing.getDom()).find('.arrow');
+        var $dom = $(thing.getDom());
+        var $voteButtons = $dom.find('.arrow');
         var $up = $($voteButtons[0]).clone();
         var $down = $($voteButtons[1]).clone();
+        var $comment = $($dom.find('a.comments')[0]).clone();
         
-        $controlsContainer.append($up, $down);
+        $comment.attr('target', '_blank');
+        
+        $controlsContainer.append($up, $down, $comment);
         
         return $controlsContainer;
     }

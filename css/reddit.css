@@ -59,11 +59,29 @@
     bottom: 0;
     left: 0;
     background-color: #333333;
-    width: 140px;
+    width: 130px;
     padding: 5px;
 }
 
 .thumbnail-holder .controls .arrow {
+    background-image: url(https://www.redditstatic.com/sprite-reddit.ZDiVRxCXXWg.png) !important;
     float: left;
-    margin-left: 5px;
+    margin: 0 0 0 5px;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 14px;
+}
+
+.thumbnail-holder .controls .arrow.up {
+    background-position: -42px -865px;
+}
+
+.thumbnail-holder .controls .arrow.down {
+    background-position: 0px -865px;
+}
+
+.thumbnail-holder .controls .comments {
+    float: right;
+    color: white;
+    margin-top: 2px;
 }
